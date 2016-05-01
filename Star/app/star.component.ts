@@ -1,23 +1,23 @@
-import {Component} from 'angular2/core';
+import {Component, Input, Output, EventEmitter} from 'angular2/core';
 
 @Component(
 {
   selector: 'star',
-  template: `
-    <i
-      class="glyphicon"
-      [class.glyphicon-star]="isFavourite"
-      [class.glyphicon-star-empty]="!isFavourite"
-      (click)="onClick()">
-    </i>
-  `
+  templateUrl: 'app/star.template.html',
+  styles: [`
+    .glyphicon-star { color: orange; }
+    .glyphicon-star-empty { color: orange; }
+  `]
 })
 export class StarComponent
 {
-  isFavourite = false;
+  @Input( "is-favourite" ) isFavourite = false;
+  
+  @Output() change = new EventEmitter();
   
   onClick()
   {
     this.isFavourite = !this.isFavourite;
+    this.change.emit( { newValue: this.isFavourite } );
   }
 }
