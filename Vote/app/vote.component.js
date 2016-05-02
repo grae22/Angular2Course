@@ -20,14 +20,19 @@ System.register(['angular2/core'], function(exports_1, context_1) {
         execute: function() {
             VoteComponent = (function () {
                 function VoteComponent() {
-                    this.upVoteEvent = new core_1.EventEmitter();
-                    this.downVoteEvent = new core_1.EventEmitter();
+                    this.voteEvent = new core_1.EventEmitter();
                 }
                 VoteComponent.prototype.onUpVote = function () {
-                    this.upVoteEvent.emit(null);
+                    if (this.myVote != 1) {
+                        this.myVote++;
+                        this.voteEvent.emit({ vote: 1 });
+                    }
                 };
                 VoteComponent.prototype.onDownVote = function () {
-                    this.downVoteEvent.emit(null);
+                    if (this.myVote != -1) {
+                        this.myVote--;
+                        this.voteEvent.emit({ vote: -1 });
+                    }
                 };
                 __decorate([
                     core_1.Input(), 
@@ -40,16 +45,12 @@ System.register(['angular2/core'], function(exports_1, context_1) {
                 __decorate([
                     core_1.Output(), 
                     __metadata('design:type', Object)
-                ], VoteComponent.prototype, "upVoteEvent", void 0);
-                __decorate([
-                    core_1.Output(), 
-                    __metadata('design:type', Object)
-                ], VoteComponent.prototype, "downVoteEvent", void 0);
+                ], VoteComponent.prototype, "voteEvent", void 0);
                 VoteComponent = __decorate([
                     core_1.Component({
                         selector: 'vote',
-                        template: "\n    <div style='width: 20px;'>\n      <i\n        class='glyphicon glyphicon-menu-up'\n        [class.highlighted]='myVote == 1'\n        (click)='onUpVote()'>\n      </i>\n      <span\n        style='font-size: 20px; display: block; text-align: center;'>\n          <b>{{ voteCount }}</b>\n      </span>\n      <i\n        class='glyphicon glyphicon-menu-down'\n        [class.highlighted]='myVote == -1'\n        (click)='onDownVote()'>\n      </i>\n    </div>",
-                        styles: ["\n    .glyphicon-menu-up\n    {\n      font-size: 25px;\n      cursor: pointer;\n    }\n    \n    .glyphicon-menu-down\n    {\n      font-size: 25px;\n      cursor: pointer;\n    }\n    \n    .highlighted\n    {\n      color: orange;\n    }\n    "]
+                        template: "\n    <div class='vote'>\n      <i\n        class='glyphicon glyphicon-menu-up vote-button'\n        [class.highlighted]='myVote == 1'\n        (click)='onUpVote()'>\n      </i>\n      <span class='vote-count'><b>{{ voteCount }}</b></span>\n      <i\n        class='glyphicon glyphicon-menu-down vote-button'\n        [class.highlighted]='myVote == -1'\n        (click)='onDownVote()'>\n      </i>\n    </div>",
+                        styles: ["\n    .vote\n    {\n      width: 20px;\n      text-align: center;\n      color: #999\n    }\n    \n    .vote-button\n    {\n      cursor: pointer;\n      font-size: 1.4em;\n    }\n    \n    .vote-count\n    {\n      font-size: 1.2em;\n    }\n    \n    .highlighted\n    {\n      color: orange;\n    }\n    "]
                     }), 
                     __metadata('design:paramtypes', [])
                 ], VoteComponent);

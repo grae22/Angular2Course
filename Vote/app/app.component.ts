@@ -7,8 +7,7 @@ import {VoteComponent} from './vote.component';
     <vote
       [voteCount]='post.voteCount'
       [myVote]='post.myVote'
-      (upVoteEvent)='onUpVote( $event )'
-      (downVoteEvent)='onDownVote( $event )'>
+      (voteEvent)='onVote( $event )'>
     </vote>`,
   directives: [VoteComponent]
 })
@@ -20,30 +19,14 @@ export class AppComponent
     myVote: 0
   }
   
-  private onUpVote()
+  private onVote( $event )
   {
-    if( this.post.myVote == 0 )
+    if( $event.vote == 1 )
     {
-      this.post.myVote = 1;
       this.post.voteCount++;
-    }
-    else if( this.post.myVote == -1 )
+    } 
+    else if( $event.vote == -1 )
     {
-      this.post.myVote = 0;
-      this.post.voteCount++;
-    }
-  }
-
-  private onDownVote()
-  {
-    if( this.post.myVote == 0 )
-    {
-      this.post.myVote = -1;
-      this.post.voteCount--;
-    }
-    else if( this.post.myVote == 1 )
-    {
-      this.post.myVote = 0;
       this.post.voteCount--;
     }
   }

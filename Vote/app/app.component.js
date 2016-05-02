@@ -28,30 +28,18 @@ System.register(['angular2/core', './vote.component'], function(exports_1, conte
                         myVote: 0
                     };
                 }
-                AppComponent.prototype.onUpVote = function () {
-                    if (this.post.myVote == 0) {
-                        this.post.myVote = 1;
+                AppComponent.prototype.onVote = function ($event) {
+                    if ($event.vote == 1) {
                         this.post.voteCount++;
                     }
-                    else if (this.post.myVote == -1) {
-                        this.post.myVote = 0;
-                        this.post.voteCount++;
-                    }
-                };
-                AppComponent.prototype.onDownVote = function () {
-                    if (this.post.myVote == 0) {
-                        this.post.myVote = -1;
-                        this.post.voteCount--;
-                    }
-                    else if (this.post.myVote == 1) {
-                        this.post.myVote = 0;
+                    else if ($event.vote == -1) {
                         this.post.voteCount--;
                     }
                 };
                 AppComponent = __decorate([
                     core_1.Component({
                         selector: 'my-app',
-                        template: "\n    <vote\n      [voteCount]='post.voteCount'\n      [myVote]='post.myVote'\n      (upVoteEvent)='onUpVote( $event )'\n      (downVoteEvent)='onDownVote( $event )'>\n    </vote>",
+                        template: "\n    <vote\n      [voteCount]='post.voteCount'\n      [myVote]='post.myVote'\n      (voteEvent)='onVote( $event )'>\n    </vote>",
                         directives: [vote_component_1.VoteComponent]
                     }), 
                     __metadata('design:paramtypes', [])

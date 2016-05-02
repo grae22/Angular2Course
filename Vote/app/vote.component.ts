@@ -4,33 +4,36 @@ import {Component, Input, Output, EventEmitter} from 'angular2/core';
 {
   selector: 'vote',
   template: `
-    <div style='width: 20px;'>
+    <div class='vote'>
       <i
-        class='glyphicon glyphicon-menu-up'
+        class='glyphicon glyphicon-menu-up vote-button'
         [class.highlighted]='myVote == 1'
         (click)='onUpVote()'>
       </i>
-      <span
-        style='font-size: 20px; display: block; text-align: center;'>
-          <b>{{ voteCount }}</b>
-      </span>
+      <span class='vote-count'><b>{{ voteCount }}</b></span>
       <i
-        class='glyphicon glyphicon-menu-down'
+        class='glyphicon glyphicon-menu-down vote-button'
         [class.highlighted]='myVote == -1'
         (click)='onDownVote()'>
       </i>
     </div>`,
   styles: [`
-    .glyphicon-menu-up
+    .vote
     {
-      font-size: 25px;
-      cursor: pointer;
+      width: 20px;
+      text-align: center;
+      color: #999
     }
     
-    .glyphicon-menu-down
+    .vote-button
     {
-      font-size: 25px;
       cursor: pointer;
+      font-size: 1.4em;
+    }
+    
+    .vote-count
+    {
+      font-size: 1.2em;
     }
     
     .highlighted
@@ -44,16 +47,23 @@ export class VoteComponent
   @Input() voteCount: number;
   @Input() myVote: number;
   
-  @Output() upVoteEvent = new EventEmitter();
-  @Output() downVoteEvent = new EventEmitter();
+  @Output() voteEvent = new EventEmitter();
   
   private onUpVote()
   {
-    this.upVoteEvent.emit( null );
+    if( this.myVote != 1 )
+    {
+      this.myVote++;
+      this.voteEvent.emit( { vote: 1 } );
+    }
   }
   
   private onDownVote()
   {
-    this.downVoteEvent.emit( null );
+    if( this.myVote != -1 )
+    {
+      this.myVote--;
+      this.voteEvent.emit( { vote: -1 } );
+    }
   }
 }
