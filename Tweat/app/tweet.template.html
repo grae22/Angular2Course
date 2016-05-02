@@ -1,14 +1,14 @@
 <div class="media">
   <div class="media-left">
     <a href="#">
-      <img class="media-object" src="http://lorempixel.com/100/100/people?1">
+      <img class="media-object" src="{{ data.picUrl }}">
     </a>
   </div>
   <div class="media-body">
-    <h4 class="media-heading"><b>{{ _name }}</b>
-      <span style='color: #aaa;'>{{ _nick }}</span>
+    <h4 class="media-heading"><b>{{ data.name }}</b>
+      <span style='color: #aaa;'>{{ data.nick }}</span>
     </h4>
-    <div>{{ _content }}</div>
-    <span><heart></heart></span>
+    <div>{{ data.content }}</div>
+    <span><heart [heartCount]='data.heartCount' [isHearted]='data.hearted'></heart></span>
   </div>
 </div>

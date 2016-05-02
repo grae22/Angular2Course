@@ -23,10 +23,11 @@ System.register(['angular2/core', './heart.component'], function(exports_1, cont
         execute: function() {
             TweetComponent = (function () {
                 function TweetComponent() {
-                    this._name = "Name";
-                    this._nick = "@nick";
-                    this._content = "This is content...";
                 }
+                __decorate([
+                    core_1.Input(), 
+                    __metadata('design:type', Object)
+                ], TweetComponent.prototype, "data", void 0);
                 TweetComponent = __decorate([
                     core_1.Component({
                         selector: 'tweet',
