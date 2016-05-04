@@ -20,11 +20,20 @@ System.register(['angular2/core'], function(exports_1, context_1) {
         execute: function() {
             ZippyComponent = (function () {
                 function ZippyComponent() {
+                    this.title = "";
+                    this.isExpanded = false;
                 }
+                ZippyComponent.prototype.onClick = function () {
+                    this.isExpanded = !this.isExpanded;
+                };
+                __decorate([
+                    core_1.Input(), 
+                    __metadata('design:type', Object)
+                ], ZippyComponent.prototype, "title", void 0);
                 ZippyComponent = __decorate([
                     core_1.Component({
                         selector: 'zippy',
-                        template: "\n    <div class='zippy'>\n      <ng-content></ng-content>\n    </div>\n    ",
+                        template: "\n    <div\n      class='zippy'\n      (click)='onClick()'>\n      <b>{{ title }}</b>\n      <i\n        class='pull-right glyphicon'\n        [ngClass]=\"\n          {\n            'glyphicon-chevron-up': isExpanded,\n            'glyphicon-chevron-down': !isExpanded\n          }\">\n      </i>\n      <div *ngIf='isExpanded'>\n        <ng-content></ng-content>\n      </div>\n    </div>\n    ",
                         styles: ["\n    .zippy\n    {\n      width: 60%;\n      border-style: groove;\n      border-width: 2px;\n    }\n    "]
                     }), 
                     __metadata('design:paramtypes', [])
