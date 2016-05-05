@@ -6,5 +6,10 @@ import {Component} from 'angular2/core';
 })
 export class EmailFormComponent
 {
-
+  frequencies =
+  [
+    "Daily",
+    "Weekly",
+    "Monthly"
+  ];
 }

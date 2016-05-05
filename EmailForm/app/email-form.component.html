@@ -39,11 +39,20 @@
   </div>
   <div class="form-group">
     <label for="frequency">Frequency of emails</label>
-    <select id="frequency" class="form-control" required>
-      <option>Daily</option>
-      <option>Weekly</option>
-      <option>Monthly</option>
+    <select
+      ngControl="frequency"
+      #frequency="ngForm"
+      id="frequency"
+      class="form-control"
+      required>
+      <option></option>
+      <option *ngFor="#freq of frequencies">{{ freq }}</option>
     </select>
+    <div
+      *ngIf="frequency.touched && !frequency.valid"
+      class="alert alert-danger">
+      Please select a frequency.
+    </div>
   </div>
   <div class="form-group">
     <button

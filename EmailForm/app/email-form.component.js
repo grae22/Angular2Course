@@ -20,6 +20,11 @@ System.register(['angular2/core'], function(exports_1, context_1) {
         execute: function() {
             EmailFormComponent = (function () {
                 function EmailFormComponent() {
+                    this.frequencies = [
+                        "Daily",
+                        "Weekly",
+                        "Monthly"
+                    ];
                 }
                 EmailFormComponent = __decorate([
                     core_1.Component({
