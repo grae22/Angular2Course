@@ -9,6 +9,7 @@
       id="username"
       type="text"
       class="form-control">
+    <div *ngIf="username.control.pending">Checking for uniqueness...</div>
     <div *ngIf="username.touched && username.errors">
       <div
         *ngIf="username.errors.required"
